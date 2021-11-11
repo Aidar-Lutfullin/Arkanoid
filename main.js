@@ -36,8 +36,8 @@ let game = {
 
   render() {
     this.ctx.drawImage(this.sprites.background, 0, 0);
-    this.ctx.drawImage(this.sprites.ball, 250, 200);
-    this.ctx.drawImage(this.sprites.platform, 230, 325);
+    this.ctx.drawImage(this.sprites.ball, this.ball.x, this.ball.y);
+    this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
     this.ctx.drawImage(this.sprites.block, 250, 50);
   },
 
@@ -47,6 +47,16 @@ let game = {
       this.run();
     });
   },
+};
+
+game.ball = {
+  x: 290,
+  y: 310,
+};
+
+game.platform = {
+  x: 250,
+  y: 340,
 };
 
 window.addEventListener("load", () => {
