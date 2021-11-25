@@ -41,14 +41,12 @@ let game = {
   preload(callback) {
     let loaded = 0;
     let required = Object.keys(this.sprites).length;
-
     let onImageLoad = () => {
       ++loaded;
       if (loaded >= required) {
         callback();
       }
     };
-
     for (let key in this.sprites) {
       this.sprites[key] = new Image();
       this.sprites[key].src = "img/" + key + ".png";
