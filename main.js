@@ -47,6 +47,7 @@ let game = {
         callback();
       }
     };
+
     for (let key in this.sprites) {
       this.sprites[key] = new Image();
       this.sprites[key].src = "img/" + key + ".png";
@@ -58,6 +59,8 @@ let game = {
     for (let row = 0; row < this.rows; row++) {
       for (let col = 0; col < this.cols; col++) {
         this.blocks.push({
+          width: 80,
+          height: 29,
           x: 85 * col + 65,
           y: 34 * row + 35,
         });
@@ -68,6 +71,12 @@ let game = {
   update() {
     this.platform.move();
     this.ball.move();
+
+    for (let block of this.blocks) {
+      if (this.ball.collide(block)) {
+        this.ball.bumpBlock(block);
+      }
+    }
   },
 
   run() {
@@ -111,6 +120,8 @@ game.ball = {
   velocity: 3,
   x: 300,
   y: 315,
+  width: 43,
+  height: 43,
   start() {
     this.dy = -this.velocity;
     this.dx = game.random(-this.velocity, this.velocity);
@@ -122,6 +133,24 @@ game.ball = {
     if (this.dx) {
       this.x += this.dx;
     }
+  },
+
+  collide(element) {
+    let x = this.x + this.dx;
+    let y = this.y + this.dy;
+
+    if (
+      x + this.width > element.x &&
+      x < element.x + element.width &&
+      y + this.height > element.y &&
+      y < element.y + element.height
+    ) {
+      return true;
+    }
+    return false;
+  },
+  bumpBlock(block) {
+    this.dy *= -1;
   },
 };
 
