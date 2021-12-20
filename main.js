@@ -28,7 +28,13 @@ let game = {
 
   init() {
     this.ctx = document.getElementById("canvasgame").getContext("2d");
+    this.setTextFont();
     this.setEvents();
+  },
+
+  setTextFont() {
+    this.ctx.font = "18px Arial";
+    this.ctx.fillText("Score: " + this.score, 15, 22);
   },
 
   setEvents() {
@@ -141,6 +147,8 @@ let game = {
     this.ctx.drawImage(this.sprites.ball, this.ball.x, this.ball.y);
     this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
     this.renderBlocks();
+    this.ctx.font = "18px Arial";
+    this.ctx.fillText("Score: " + this.score, 15, 22);
   },
 
   renderBlocks() {
